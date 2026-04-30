@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastro de Veículos</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        background: #f4f4f4;
+      }
+      form {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        display: grid;
+        gap: 10px;
+      }
+      input,
+      textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Novo Cadastro de Veículo</h2>
+    <form id="meuForm">
+      <input type="text" name="placa" placeholder="Placa" required />
+      <input type="text" name="marca" placeholder="Marca" required />
+      <input type="text" name="modelo" placeholder="Modelo" required />
+      <input
+        type="number"
+        name="ano_fabricacao"
+        placeholder="Ano Fabricação"
+        required
+      />
+      <input
+        type="number"
+        name="ano_modelo"
+        placeholder="Ano Modelo"
+        required
+      />
+      <input type="text" name="cor" placeholder="Cor" required />
+      <input
+        type="text"
+        name="combustivel"
+        placeholder="Combustível"
+        required
+      />
+      <input type="number" name="quilometragem" placeholder="KM" required />
+      <input type="text" name="chassi" placeholder="Chassi" required />
+      <input type="text" name="renavam" placeholder="Renavam" required />
+      <input type="date" name="data_cadastro" required />
+      <textarea
+        name="observacoes"
+        placeholder="Observações"
+        required
+      ></textarea>
+      <button type="submit">Cadastrar Veículo</button>
+    </form>
+    <br />
+    <a href="lista.html">Ir para a Lista de Veículos</a>
+
+    <script>
+      document.getElementById("meuForm").onsubmit = function (e) {
+        e.preventDefault(); // Impede a página de recarregar
+        const dados = new FormData(this);
+        fetch("salvar.php", { method: "POST", body: dados })
+          .then((resposta) => resposta.text())
+          .then((msg) => {
+            if (msg === "Sucesso") {
+              alert("Veículo gravado!");
+              this.reset();
+            } else {
+              alert("Erro ao gravar: " + msg);
+            }
+          });
+      };
+    </script>
+  </body>
+</html>

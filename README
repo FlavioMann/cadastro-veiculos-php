@@ -1,0 +1,101 @@
+🚗 Sistema de Cadastro de Veículos
+Este projeto foi desenvolvido como parte de um desafio 
+profissional para implementar um sistema comercial de 
+cadastro e consulta de veículos. A aplicação utiliza uma 
+arquitetura cliente-servidor para gerenciar o inventário de 
+veículos disponíveis para venda.
+
+🛠️ Tecnologias Utilizadas
+Front-end: HTML5, CSS3 e JavaScript (ES6+).
+
+Back-end: PHP.
+
+Banco de Dados: MySQL.
+
+Comunicação: API Fetch para requisições assíncronas e formato JSON para intercâmbio de dados.
+
+Ambiente: XAMPP (Apache & MySQL).
+
+📂 Estrutura do Projeto
+index.html: Interface principal com o formulário de cadastro.
+
+lista.html: Interface de visualização dos veículos em tabela.
+
+db.php: Script de conexão com o banco de dados via MySQLi.
+
+salvar.php: Processamento de dados via método POST e comando DML INSERT.
+
+listar.php: Consulta ao banco via comando DML SELECT e retorno em formato JSON.
+
+Aqui está um modelo de README.md profissional e completo, estruturado para atender tanto aos requisitos técnicos quanto ao "Memorial Analítico" solicitado no seu desafio.
+
+🚗 Sistema de Cadastro de Veículos
+Este projeto foi desenvolvido como parte de um desafio profissional para implementar um sistema comercial de cadastro e consulta de veículos. A aplicação utiliza uma arquitetura cliente-servidor para gerenciar o inventário de veículos disponíveis para venda.
+
+🛠️ Tecnologias Utilizadas
+Front-end: HTML5, CSS3 e JavaScript (ES6+).
+
+Back-end: PHP.
+
+Banco de Dados: MySQL.
+
+Comunicação: API Fetch para requisições assíncronas e formato JSON para intercâmbio de dados.
+
+Ambiente: XAMPP (Apache & MySQL).
+
+📂 Estrutura do Projeto
+index.html: Interface principal com o formulário de cadastro.
+
+lista.html: Interface de visualização dos veículos em tabela.
+
+db.php: Script de conexão com o banco de dados via MySQLi.
+
+salvar.php: Processamento de dados via método POST e comando DML INSERT.
+
+listar.php: Consulta ao banco via comando DML SELECT e retorno em formato JSON.
+
+🗄️ Banco de Dados (DDL)
+A estrutura da tabela foi desenhada para garantir a integridade dos dados, com todos os campos definidos como obrigatórios (NOT NULL).
+
+SQL
+CREATE TABLE veiculos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(10) NOT NULL,
+    marca VARCHAR(50) NOT NULL,
+    modelo VARCHAR(50) NOT NULL,
+    ano_fabricacao INT NOT NULL,
+    ano_modelo INT NOT NULL,
+    cor VARCHAR(30) NOT NULL,
+    combustivel VARCHAR(20) NOT NULL,
+    quilometragem INT NOT NULL,
+    chassi VARCHAR(50) NOT NULL,
+    renavam VARCHAR(50) NOT NULL,
+    data_cadastro DATE NOT NULL,
+    observacoes TEXT NOT NULL
+);
+📝 Memorial Analítico
+1. Solução Implementada
+A solução foca na separação de responsabilidades. O front-end lida com a captura e exibição de dados, enquanto o back-end em PHP gerencia a lógica de persistência e consulta. A comunicação assíncrona garante que o usuário não precise recarregar a página para cadastrar novos itens.
+
+2. Operações de Banco de Dados
+DML INSERT: Utilizada no script salvar.php para registrar novos veículos.
+
+DML SELECT: Utilizada no script listar.php para recuperar todos os registros da tabela.
+
+3. Requisitos Atendidos
+Utilização obrigatória de PHP no back-end.
+
+Montagem dinâmica de tabela HTML através de um retorno JSON.
+
+Validação de campos obrigatórios tanto na estrutura do banco quanto no formulário.
+
+Implementação estrita de funções de inserção e consulta.
+
+🚀 Como Executar
+Certifique-se de que o Apache e o MySQL estão ativos no XAMPP Control Panel.
+
+Importe o script SQL acima no seu phpMyAdmin dentro de um banco de dados chamado sistema_vendas.
+
+Mova a pasta do projeto para o diretório htdocs do seu servidor local.
+
+Acesse http://localhost/veiculos/index.html no seu navegador.
