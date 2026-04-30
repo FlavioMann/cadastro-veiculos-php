@@ -2,55 +2,151 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Listagem</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Vendas | Listagem</title>
     <style>
+      :root {
+        --primary-color: #2563eb;
+        --bg-color: #f1f5f9;
+        --text-color: #1e293b;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .header-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 15px;
+      }
+
+      h2 {
+        margin: 0;
+        color: var(--primary-color);
+      }
+
+      .btn-novo {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        transition: opacity 0.2s;
+      }
+
+      .btn-novo:hover {
+        opacity: 0.9;
+      }
+
+      .table-responsive {
+        overflow-x: auto;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        font-size: 15px;
       }
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: left;
-      }
+
       th {
-        background-color: #007bff;
-        color: white;
+        background-color: #f8fafc;
+        color: #64748b;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        padding: 15px;
+        text-align: left;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+
+      tr:hover {
+        background-color: #f1f5f9;
+      }
+
+      .badge-km {
+        background: #e2e8f0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
-    <h2>Veículos Cadastrados</h2>
-    <table id="tabela">
-      <thead>
-        <tr>
-          <th>Placa</th>
-          <th>Marca</th>
-          <th>Modelo</th>
-          <th>Cor</th>
-          <th>KM</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <br />
-    <a href="index.html">Voltar para Cadastro</a>
+    <div class="container">
+      <div class="header-area">
+        <h2>📋 Veículos Cadastrados</h2>
+        <a href="index.html" class="btn-novo">+ Novo Cadastro</a>
+      </div>
+
+      <div class="table-responsive">
+        <table id="tabela">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Cor</th>
+              <th>Quilometragem</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
 
     <script>
-      // JS consome o JSON do listar.php para montar a tabela
       fetch("listar.php")
         .then((res) => res.json())
         .then((veiculos) => {
           const corpoTabela = document.querySelector("#tabela tbody");
+          if (veiculos.length === 0) {
+            corpoTabela.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">Nenhum veículo encontrado.</td></tr>`;
+            return;
+          }
           veiculos.forEach((v) => {
-            corpoTabela.innerHTML += `<tr>
-                    <td>${v.placa}</td><td>${v.marca}</td>
-                    <td>${v.modelo}</td><td>${v.cor}</td><td>${v.quilometragem}</td>
-                </tr>`;
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                    <td><strong>${v.placa}</strong></td>
+                    <td>${v.marca}</td>
+                    <td>${v.modelo}</td>
+                    <td>${v.cor}</td>
+                    <td><span class="badge-km">${v.quilometragem} KM</span></td>
+                `;
+            corpoTabela.appendChild(row);
           });
-        });
+        })
+        .catch((err) => console.error("Erro ao carregar dados:", err));
     </script>
   </body>
 </html>

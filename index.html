@@ -2,89 +2,251 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Cadastro de Veículos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Vendas | Cadastro</title>
     <style>
+      /* Variáveis de Cores */
+      :root {
+        --primary-color: #2563eb;
+        --success-color: #16a34a;
+        --bg-color: #f1f5f9;
+        --text-color: #1e293b;
+      }
+
       body {
-        font-family: sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
         padding: 20px;
-        background: #f4f4f4;
       }
-      form {
+
+      .container {
         background: white;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 500px;
-        display: grid;
-        gap: 10px;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 650px;
       }
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+
+      /* Grid para o formulário */
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      /* Campo de observações e botões ocupam a linha toda */
+      .full-width {
+        grid-column: span 2;
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #64748b;
+      }
+
       input,
       textarea {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        padding: 12px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 15px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
       }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
       button {
-        padding: 10px;
-        background: #28a745;
+        margin-top: 10px;
+        padding: 15px;
+        background-color: var(--success-color);
         color: white;
         border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
         cursor: pointer;
+        transition:
+          filter 0.2s,
+          transform 0.1s;
+      }
+
+      button:hover {
+        filter: brightness(1.1);
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      .links {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsividade para telas pequenas */
+      @media (max-width: 600px) {
+        form {
+          grid-template-columns: 1fr;
+        }
+        .full-width {
+          grid-column: span 1;
+        }
       }
     </style>
   </head>
   <body>
-    <h2>Novo Cadastro de Veículo</h2>
-    <form id="meuForm">
-      <input type="text" name="placa" placeholder="Placa" required />
-      <input type="text" name="marca" placeholder="Marca" required />
-      <input type="text" name="modelo" placeholder="Modelo" required />
-      <input
-        type="number"
-        name="ano_fabricacao"
-        placeholder="Ano Fabricação"
-        required
-      />
-      <input
-        type="number"
-        name="ano_modelo"
-        placeholder="Ano Modelo"
-        required
-      />
-      <input type="text" name="cor" placeholder="Cor" required />
-      <input
-        type="text"
-        name="combustivel"
-        placeholder="Combustível"
-        required
-      />
-      <input type="number" name="quilometragem" placeholder="KM" required />
-      <input type="text" name="chassi" placeholder="Chassi" required />
-      <input type="text" name="renavam" placeholder="Renavam" required />
-      <input type="date" name="data_cadastro" required />
-      <textarea
-        name="observacoes"
-        placeholder="Observações"
-        required
-      ></textarea>
-      <button type="submit">Cadastrar Veículo</button>
-    </form>
-    <br />
-    <a href="lista.html">Ir para a Lista de Veículos</a>
+    <div class="container">
+      <h2>🚘 Cadastro de Veículo</h2>
+
+      <form id="meuForm">
+        <div class="field-group">
+          <label>Placa</label>
+          <input type="text" name="placa" placeholder="Ex: ABC-1234" required />
+        </div>
+
+        <div class="field-group">
+          <label>Marca</label>
+          <input type="text" name="marca" placeholder="Ex: Toyota" required />
+        </div>
+
+        <div class="field-group">
+          <label>Modelo</label>
+          <input type="text" name="modelo" placeholder="Ex: Corolla" required />
+        </div>
+
+        <div class="field-group">
+          <label>Cor</label>
+          <input type="text" name="cor" placeholder="Ex: Branco" required />
+        </div>
+
+        <div class="field-group">
+          <label>Ano Fabricação</label>
+          <input
+            type="number"
+            name="ano_fabricacao"
+            placeholder="2023"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label>Ano Modelo</label>
+          <input type="number" name="ano_modelo" placeholder="2024" required />
+        </div>
+
+        <div class="field-group">
+          <label>Combustível</label>
+          <input
+            type="text"
+            name="combustivel"
+            placeholder="Flex/Diesel"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label>Quilometragem</label>
+          <input type="number" name="quilometragem" placeholder="0" required />
+        </div>
+
+        <div class="field-group">
+          <label>Chassi</label>
+          <input
+            type="text"
+            name="chassi"
+            placeholder="Nº do Chassi"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label>Renavam</label>
+          <input
+            type="text"
+            name="renavam"
+            placeholder="Nº do Renavam"
+            required
+          />
+        </div>
+
+        <div class="field-group full-width">
+          <label>Data de Cadastro</label>
+          <input type="date" name="data_cadastro" required />
+        </div>
+
+        <div class="field-group full-width">
+          <label>Observações</label>
+          <textarea
+            name="observacoes"
+            rows="3"
+            placeholder="Detalhes adicionais..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="full-width">Finalizar Cadastro</button>
+      </form>
+
+      <div class="links">
+        <a href="lista.html">← Ver Veículos Cadastrados</a>
+      </div>
+    </div>
 
     <script>
       document.getElementById("meuForm").onsubmit = function (e) {
-        e.preventDefault(); // Impede a página de recarregar
+        e.preventDefault();
         const dados = new FormData(this);
         fetch("salvar.php", { method: "POST", body: dados })
           .then((resposta) => resposta.text())
           .then((msg) => {
-            if (msg === "Sucesso") {
-              alert("Veículo gravado!");
+            if (msg.trim() === "Sucesso") {
+              alert("✅ Veículo gravado com sucesso!");
               this.reset();
             } else {
-              alert("Erro ao gravar: " + msg);
+              alert("❌ Erro ao gravar: " + msg);
             }
-          });
+          })
+          .catch((err) => alert("Erro na requisição: " + err));
       };
     </script>
   </body>
